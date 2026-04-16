@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Gerenciador de Tarefas — MVC + LocalStorage</title>
+    <meta
+      name="description"
+      content="Aplicação de gerenciamento de tarefas (To-Do List) com arquitetura MVC, módulos ES6 e persistência em localStorage."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body>
+    <header class="app-header">
+      <div class="app-header__inner">
+        <div class="app-header__brand">
+          <span class="app-header__logo">✅</span>
+          <h1 class="app-header__title">Gerenciador de Tarefas</h1>
+        </div>
+        <div class="app-header__badges">
+          <span class="badge badge--total">
+            Total: <strong id="contador-total">0</strong>
+          </span>
+          <span class="badge badge--concluidas">
+            Concluídas: <strong id="contador-concluidas">0</strong>
+          </span>
+        </div>
+      </div>
+    </header>
+
+    <main class="app-main">
+      <section class="card adicionar-card" aria-labelledby="heading-adicionar">
+        <h2 id="heading-adicionar" class="card__heading">Nova Tarefa</h2>
+
+        <form id="form-adicionar" class="form-adicionar" novalidate>
+          <div class="form-adicionar__grupo">
+            <input
+              id="input-descricao"
+              type="text"
+              class="input-texto"
+              placeholder="O que precisa ser feito?"
+              maxlength="200"
+              required
+              autocomplete="off"
+              aria-label="Descrição da nova tarefa"
+            />
+            <button id="btn-adicionar" type="submit" class="btn btn--primario">
+              <span class="btn__icon">+</span> Adicionar
+            </button>
+          </div>
+        </form>
+      </section>
+
+      <section class="card tarefas-card" aria-labelledby="heading-tarefas">
+        <div class="tarefas-card__header">
+          <h2 id="heading-tarefas" class="card__heading">Minhas Tarefas</h2>
+          <button id="btn-limpar-concluidas" class="btn btn--ghost btn--sm">
+            🗑 Limpar concluídas
+          </button>
+        </div>
+
+        <ul id="lista-tarefas" class="lista-tarefas" aria-label="Lista de tarefas" role="list">
+        </ul>
+      </section>
+    </main>
+
+    <div
+      id="modal-editar"
+      class="modal"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="modal-titulo"
+    >
+      <div class="modal__caixa">
+        <div class="modal__cabecalho">
+          <h3 id="modal-titulo" class="modal__titulo">Editar Tarefa</h3>
+          <button
+            class="modal__fechar"
+            aria-label="Fechar modal"
+            onclick="document.getElementById('modal-editar').classList.remove('modal--aberto')"
+          >✕</button>
+        </div>
+        <form id="form-editar" class="form-editar" novalidate>
+          <label for="input-editar-descricao" class="label">Descrição</label>
+          <input
+            id="input-editar-descricao"
+            type="text"
+            class="input-texto"
+            maxlength="200"
+            required
+            autocomplete="off"
+          />
+          <div class="modal__acoes">
+            <button type="button" class="btn btn--ghost" onclick="document.getElementById('modal-editar').classList.remove('modal--aberto')">
+              Cancelar
+            </button>
+            <button id="btn-salvar-edicao" type="submit" class="btn btn--primario">
+              Salvar Alterações
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+    <script type="module" src="./main.mjs"></script>
+  </body>
+</html>

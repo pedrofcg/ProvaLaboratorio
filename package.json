@@ -1,0 +1,11 @@
+{
+  "name": "crud-tarefas",
+  "version": "1.0.0",
+  "description": "CRUD de Tarefas com JavaScript MVC e LocalStorage",
+  "type": "module",
+  "main": "main.mjs",
+  "scripts": {
+    "start": "npx serve .",
+    "dev": "npx serve ."
+  }
+}
